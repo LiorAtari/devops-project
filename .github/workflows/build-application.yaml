@@ -28,4 +28,4 @@ jobs:
           IMAGE_NAME=develeap-python-app
 
           docker build -f ./python-application/Dockerfile -t $REGISTRY/$IMAGE_NAME ./python-application
-          docker push REGISTRY/$IMAGE_NAME
+          docker push $REGISTRY/$IMAGE_NAME
