@@ -25,7 +25,7 @@ jobs:
         run: |
           REGISTRY=${{ secrets.DOCKER_USERNAME }}
           DOCKERFILE_PATH=./python-application/Dockerfile
-          IMAGE_NAME: develeap-python-app
+          IMAGE_NAME=develeap-python-app
 
           docker build -f ./python-application/Dockerfile -t $REGISTRY/$IMAGE_NAME ./python-application
           docker push REGISTRY/$IMAGE_NAME
