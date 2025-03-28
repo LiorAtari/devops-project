@@ -10,6 +10,9 @@ spec:
     matchLabels:
       {{- include "python-chart.selectorLabels" . | nindent 6 }}
   template:
+    metadata:
+      labels:
+        {{- include "python-chart.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
