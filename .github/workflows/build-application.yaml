@@ -43,17 +43,19 @@ jobs:
 
       - name: Update Helm Chart with new version tag
         run: |
-          sed -i "s|version: *|version: ${{ env.VERSION }}|g" ./python-chart/Chart.yaml
-          sed -i "s|tag: *|tag: ${{ env.VERSION }}|g" ./python-chart/Chart.yaml
+          sed -i "s|version: *|version: $VERSION|g" ./python-chart/Chart.yaml
+          sed -i "s|tag: *|tag: $VERSION|g" ./python-chart/values.yaml
 
       - name: Commit updated Chart tags 
+        env:
+          VERSION: ${{ steps.tag_version.outputs.new_tag }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
           if [[ $(git status --porcelain) ]]; then
             git add ./python-chart
-            git commit -m "Updating Helm Chart tag verisons to v${{ env.tag }}"
+            git commit -m "Updating Helm Chart tag verisons to v${VERSION}"
             git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/LiorAtari/devops-project.git
           else
             echo "No changes to commit"
