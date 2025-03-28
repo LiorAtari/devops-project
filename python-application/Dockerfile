@@ -13,6 +13,10 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt --no-cache-dir
 
-COPY . . 
+COPY . .
+
+RUN adduser --disabled-password --gecos '' appuser && chown -R appuser /app
+
+USER appuser
 
 CMD ["gunicorn", "--workers", "4", "--bind", "0.0.0.0:8080", "--access-logfile", "-", "--error-logfile", "-", "app:app"]
