@@ -4,14 +4,6 @@ image:
   pullPolicy: Always
   tag: "latest"
 
-securityContext:
-  capabilities:
-    drop:
-    - ALL
-  readOnlyRootFilesystem: true
-  runAsNonRoot: true
-  runAsUser: 1001
-
 service:
   type: ClusterIP
   port: 8080
