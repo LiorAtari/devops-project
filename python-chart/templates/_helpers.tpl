@@ -35,6 +35,7 @@ Common labels
 */}}
 {{- define "python-chart.labels" -}}
 helm.sh/chart: {{ include "python-chart.chart" . }}
+app: {{ include "python-chart.name" }}
 {{ include "python-chart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
@@ -48,15 +49,4 @@ Selector labels
 {{- define "python-chart.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "python-chart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "python-chart.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "python-chart.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
 {{- end }}
