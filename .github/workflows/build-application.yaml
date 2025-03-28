@@ -43,8 +43,9 @@ jobs:
 
       - name: Update Helm Chart with new version tag
         run: |
-          sed -i "s|version: *|version: $VERSION|g" ./python-chart/Chart.yaml
-          sed -i "s|tag: *|tag: $VERSION|g" ./python-chart/values.yaml
+          sed -i "s|^version: .*|version: $VERSION|g" ./python-chart/Chart.yaml
+          sed -i "s|^appVersion: .*|appVersion: \"$VERSION\|g" ./python-chart/Chart.yaml
+          sed -i "s|^tag: .*|tag: \"$VERSION\|g" ./python-chart/values.yaml
 
       - name: Commit updated Chart tags 
         env:
