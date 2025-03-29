@@ -15,8 +15,8 @@ resource "google_container_cluster" "lior-cluster" {
 # Creating a custom node pool
 resource "google_container_node_pool" "app-node-pool" {
   name       = "app-node-pool"
-  location = var.region
-  project  = var.project
+  location   = var.region
+  project    = var.project
   cluster    = google_container_cluster.lior-cluster.name
   node_count = 1
   # Creating a spot node pool
@@ -36,9 +36,9 @@ resource "kubernetes_namespace" "application" {
   metadata {
     name = "develeap-python-app"
   }
-  depends_on = [ 
+  depends_on = [
     google_container_cluster.lior-cluster
-   ]
+  ]
 }
 
 # Creating the ArgoCD namespace
@@ -46,7 +46,7 @@ resource "kubernetes_namespace" "argocd" {
   metadata {
     name = "argocd"
   }
-  depends_on = [ 
+  depends_on = [
     google_container_cluster.lior-cluster
-   ]
+  ]
 }
