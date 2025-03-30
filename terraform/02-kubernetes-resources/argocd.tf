@@ -103,9 +103,9 @@ resource "kubernetes_secret" "mysql-secrets" {
     namespace = "python-app"
   }
   data = {
-    mysql-root-password        = local.mysql_root_password_decoded
-    mysql-password             = local.mysql_password_decoded
-    mysql-replication-password = local.mysql_replication_password_decoded
+    mysql-root-password        = local.mysql_root_password_encoded
+    mysql-password             = local.mysql_password_encoded
+    mysql-replication-password = local.mysql_replication_password_encoded
   }
   type = "Opaque"
   depends_on = [
