@@ -29,6 +29,7 @@ applications:
           auth:
             existingSecret: "mysql-secrets"
             database: "exampleDb"
+            username: "lior"
     destination:
       server: https://kubernetes.default.svc
       namespace: python-app
