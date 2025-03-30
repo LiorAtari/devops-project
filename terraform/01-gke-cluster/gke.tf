@@ -30,23 +30,3 @@ resource "google_container_node_pool" "app-node-pool" {
     ]
   }
 }
-
-# Creating the application's namespace
-resource "kubernetes_namespace" "application" {
-  metadata {
-    name = "develeap-python-app"
-  }
-  depends_on = [
-    google_container_cluster.lior-cluster
-  ]
-}
-
-# Creating the ArgoCD namespace
-resource "kubernetes_namespace" "argocd" {
-  metadata {
-    name = "argocd"
-  }
-  depends_on = [
-    google_container_cluster.lior-cluster
-  ]
-}

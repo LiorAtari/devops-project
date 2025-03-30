@@ -1,0 +1,38 @@
+applications:
+  python-app:
+    name: python-app
+    namespace: argocd
+    project: default
+    source:
+      repoURL: git@github.com:LiorAtari/devops-project.git
+      targetRevision: main
+      path: python-chart
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: python-app
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+
+  mysql:
+    name: mysql
+    namespace: argocd
+    project: default
+    source:
+      chart: mysql
+      repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: 12.0.0
+      helm:
+        releaseName: mysql
+        values: |
+          auth:
+            existingSecret: "mysql-secrets"
+            database: "exampleDb"
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: python-app
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
