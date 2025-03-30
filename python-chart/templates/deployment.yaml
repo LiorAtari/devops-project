@@ -22,3 +22,17 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+          - name: DB_HOST
+            value: {{ .Values.env.DB_HOST | quote }}
+          - name: BACKEND
+            value: {{ .Values.env.BACKEND | quote }}
+          - name: DB_NAME
+            value: {{ .Values.env.DB_NAME | quote }}
+          - name: DB_USER
+            value: {{ .Values.env.DB_USER | quote }}
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: "mysql-secrets"
+                key: "lior"
