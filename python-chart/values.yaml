@@ -5,8 +5,8 @@ image:
   tag: "latest"
 
 env:
-  DB_HOST: my-mysql.python-app.svc.cluster.local
-  BACKEND: http://my-mysql.python-app.svc.cluster.local
+  DB_HOST: mysql.python-app.svc.cluster.local
+  BACKEND: http://mysql.python-app.svc.cluster.local
   DB_USER: lior
   DB_NAME: exampleDb
 
