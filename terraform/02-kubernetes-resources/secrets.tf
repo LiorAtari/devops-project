@@ -13,6 +13,6 @@ locals {
   mysql_secret_json = jsondecode(data.google_secret_manager_secret_version.mysql_secrets.secret_data)
 
   mysql_root_password_encoded        = base64encode(local.mysql_secret_json["mysql-root-password"])
-  mysql_password_encoded             = base64encode(local.mysql_secret_json["flaskapp"])
+  mysql_password_encoded             = base64encode(local.mysql_secret_json["mysql-password"])
   mysql_replication_password_encoded = base64encode(local.mysql_secret_json["mysql-replication-password"])
 }
