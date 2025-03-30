@@ -7,7 +7,7 @@ image:
 env:
   DB_HOST: mysql.python-app.svc.cluster.local
   BACKEND: http://mysql.python-app.svc.cluster.local
-  DB_USER: lior
+  DB_USER: flaskapp
   DB_NAME: exampleDb
 
 service:
