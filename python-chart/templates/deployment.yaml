@@ -35,4 +35,4 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: "mysql-secrets"
-                key: "lior"
+                key: "mysql-password"
