@@ -1,6 +1,6 @@
 # DevOps Project - Develeap
 
-This repository contains everything you need to deploy a Python web application on Google Kubernetes Engine (GKE) using Terraform, Helm, and ArgoCD.
+This repository contains everything you need to deploy the Python web application on Google Kubernetes Engine (GKE) using Terraform, Helm, and ArgoCD.
 
 ## Project Structure
 
@@ -14,7 +14,7 @@ This repository contains everything you need to deploy a Python web application 
  
 - **`python-chart/`**: Contains the Helm chart with the kubernetes manifests for deploying the python-application on the cluster
 
-- **`.github/workflows/`**: Includes the GitHub Action used to build and tag Docker image for the python-app and pushes it to DockerHub. The new image version is then written to the repo's Helm chart
+- **`.github/workflows/`**: Includes the GitHub Action used to build and tag the Docker image for the python-app and pushes it to DockerHub. The new image version is then written to the repo's Helm chart
 
 
 ## Prerequisites
@@ -28,16 +28,19 @@ Before running Terraform, make sure you have:
    - [kubectl](https://kubernetes.io/docs/tasks/tools/)
    - [helm](https://helm.sh/docs/intro/install/)
 
+### NOTE – Before Beginning Infrastructure Provisioning
+This project requires the creation of two GCP secrets in Secret Manager prior to running Terraform.  
+Both secrets were shared securely via email.  
+- ArgoCD requires an SSH key to access this repository as it is private.
+- MySQL is provisioned with a custom user called "flaskapp". This is done through a secret in K8s taken from GCP
 
-Before running the Terraform code in `02-kubernetes-resources`:
-- Ensure the following **two secrets** are created in GCP Secret Manager from the secret shared with you securely
+Required secret names: 
+- `devops-project-repo-ssh-key`
+- `mysql-secrets`
 
-   - `devops-project-repo-ssh-key`: The SSH private key that ArgoCD will use to access your Git repository.
-   - `mysql-secrets`: A secret containing your MySQL credentials in JSON or plain format.
+### GCP Secret Creation
 
-## GCP Secret Creation
-
-Create the secrets in GCP (replace <path to *>):
+Create the secrets in GCP (replace <path to *> with actual path of files downloaded from email):
 
 ```bash
 # For the SSH private key
