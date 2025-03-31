@@ -51,14 +51,19 @@ Required secret names:
 
 ### GCP Secret Creation
 
-Create the secrets in GCP (replace <path to *> with actual path of files downloaded from email):
+Create 2 files -
+- repo-ssh-key
+- mysql-users
+
+Paste the content of the secrets provided in the email into their respective files.  
+**Create the secrets in GCP (replace <path to *> with the actual path to file from the previous step):***
 
 ```bash
 # For the SSH private key
-gcloud secrets create devops-project-repo-ssh-key --data-file=<path to devops-project-repo-ssh-key>
+gcloud secrets create devops-project-repo-ssh-key --data-file=<path to repo-ssh-key>
 
 # For MySQL secrets
-gcloud secrets create mysql-secrets --data-file=<path to mysql-secrets.yaml>
+gcloud secrets create mysql-secrets --data-file=<path to mysql-users>
 ```
 
 ## How to Use
