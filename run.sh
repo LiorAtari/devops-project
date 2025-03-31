@@ -27,3 +27,7 @@ else
     echo "Pod did not become ready in time. Exiting."
     exit 1
 fi
+
+echo -e "To kill the port-forwarding process of ArgoCD and the Python app - run the following commands:\n"
+echo -e "kill $ARGOCD_PORT_FORWARD_PID"
+echo -e "kill $PYTHON_APP_PORT_FORWARD_PID\n"
