@@ -68,9 +68,8 @@ terraform plan
 terraform apply
 ```
 4. **Run the script**  
-   Once terraform finishes provisioning everything, run the following commands:
-   ```bash
-   cd ../..
-   chmod +x run.sh
-   ./run.sh
-  ```
+Once terraform finishes provisioning everything, run the following commands:
+```bash
+cd ../..
+chmod +x run.sh
+./run.sh
