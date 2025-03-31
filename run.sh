@@ -1,10 +1,12 @@
 #!/bin/bash
 
+gcloud container clusters get-credentials lior-cluster --region us-central1 --project develeap-task
+
 ARGOCD_PASSWORD=$(kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode)
 
 # Run Argo CD port-forward to access at localhost:8080
 echo "Starting port forwarding for Argo CD server on port 8080"
-kubectl -n argocd port-forward deployment/argocd-server 8080 & > /dev/null 2>&1
+kubectl -n argocd port-forward deployment/argocd-server 8080 > /dev/null 2>&1 &
 ARGOCD_PORT_FORWARD_PID=$!
 # Wait a few seconds to ensure port-forward is established
 sleep 3
@@ -13,7 +15,7 @@ echo -e "To access ArgoCD, browse to 'http://localhost:8080'\n"
 
 get_python_pod_status() {
     echo "Waiting for the Python app pod to become ready..."
-    kubectl -n python-app wait --for=condition=ready pod -l app=python-app --timeout=300s
+    kubectl -n python-app wait --for=condition=ready pod -l app.kubernetes.io/instance=python-app --timeout=300s
 }
 
 # Wait for the pod to be ready
@@ -28,6 +30,7 @@ else
     exit 1
 fi
 
-echo -e "To kill the port-forwarding process of ArgoCD and the Python app - run the following commands:\n"
+echo "To kill the port-forwarding process of ArgoCD and the Python app -"
+echo -e "run the following commands:\n"
 echo -e "kill $ARGOCD_PORT_FORWARD_PID"
 echo -e "kill $PYTHON_APP_PORT_FORWARD_PID\n"
