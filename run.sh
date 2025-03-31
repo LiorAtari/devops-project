@@ -1,6 +1,28 @@
 #!/bin/bash
 
-gcloud container clusters get-credentials lior-cluster --region us-central1 --project develeap-task
+# Require user to provide the GCP project ID
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --project)
+            PROJECT="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown parameter passed: $1"
+            echo "Usage: $0 --project <gcp-project-id>"
+            exit 1
+            ;;
+    esac
+done
+
+# Validate input
+if [[ -z "$PROJECT" ]]; then
+    echo "Missing required argument: --project"
+    echo "Usage: $0 --project <gcp-project-id>"
+    exit 1
+fi
+
+gcloud container clusters get-credentials lior-cluster --region us-central1 --project "$PROJECT"
 
 ARGOCD_PASSWORD=$(kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode)
 
