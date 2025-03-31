@@ -29,7 +29,18 @@ Before running Terraform, make sure you have:
    - [helm](https://helm.sh/docs/intro/install/)
 
 ### NOTE – Before Beginning Infrastructure Provisioning
-This project requires the creation of two GCP secrets in Secret Manager prior to running Terraform.  
+Please update the `project` default value inside the "variables.tf" file with your project name in the following folders:
+- `01-gke-cluster`
+- `02-kubernetes-resources`
+
+```
+variable "project" {
+  default = "develeap-task" # <--- Update this
+  type    = string
+}
+```
+
+Also, this project requires the creation of two GCP secrets in Secret Manager prior to running Terraform.  
 Both secrets were shared securely via email.  
 - ArgoCD requires an SSH key to access this repository as it is private.
 - MySQL is provisioned with a custom user called "flaskapp". This is done through a secret in K8s taken from GCP
