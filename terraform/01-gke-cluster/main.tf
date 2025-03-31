@@ -12,11 +12,6 @@ provider "google" {
   region  = var.region
 }
 
-resource "google_project" "develeap-task" {
-  name       = var.project
-  project_id = var.project
-}
-
 # Enabling APIs required which are not enabled by default
 resource "google_project_service" "compute" {
   service = "compute.googleapis.com"
