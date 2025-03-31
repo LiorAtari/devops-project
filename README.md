@@ -72,14 +72,18 @@ gcloud secrets create mysql-secrets --data-file=<path to mysql-users>
 git clone git@github.com:LiorAtari/devops-project.git
 cd devops-project/terraform/
 ```
-2. **GKE cluster setup (~15 minutes to finish):**
+2. **Login to GCP:**
+```bash
+gcloud auth application-default login
+``` 
+3. **GKE cluster setup (~15 minutes to finish):**
 ```bash
 cd 01-gke-cluster
 terraform init
 terraform plan
 terraform apply
 ```
-3. **Kubernetes resources setup (ArgoCd, helm, etc.):**
+4. **Kubernetes resources setup (ArgoCd, helm, etc.):**
 ```bash
 cd ../02-kubernetes-resources
 terraform init
@@ -87,7 +91,7 @@ terraform plan
 terraform apply
 ```
 
-4. **Run the script**  
+5. **Run the script**  
 Once terraform finishes provisioning everything, run the following commands:
 ```bash
 cd ../..
